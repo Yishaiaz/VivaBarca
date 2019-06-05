@@ -15,6 +15,16 @@ mainApp.config(function($routeProvider) {
     controller: "registerCtrl",
     controllerAs: "ctrl"
   });
+  $routeProvider.when("/userProfile", {
+    templateUrl: "pages/userProfile.html",
+    controller: "userProfileCtrl",
+    controllerAs: "ctrl"
+  });
+  $routeProvider.when("/POIS", {
+    templateUrl: "pages/POIList.html",
+    controller: "POIListCtrl",
+    controllerAs: "ctrl"
+  });
 });
 mainApp.controller("mainCtrl", function($scope) {
   $scope.name = "testing name";

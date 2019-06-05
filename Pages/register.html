@@ -1,27 +1,123 @@
-<div class="container-fluid mx-auto" >
-<div class="row">
-<div class="col-sm-3"></div>
-<div class="col-sm-6">
-<form name="registerForm" ng-submit="submit()" novalidate>
+<div class="container-fluid mx-auto">
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+      <form name="registerForm" ng-submit="submit()" novalidate>
+        <!-- firstname -->
+        <input
+          class="form-control registerInput"
+          placeholder="Your First Name"
+          type="text"
+          name="firstname"
+          ng-model="firstname"
+          required
+        />
+        <span ng-show="registerForm.firstname.$error.required"
+          >This is required!
+        </span>
+        <!-- lastname -->
+        <input
+          class="form-control registerInput"
+          placeholder="Your Last Name"
+          type="text"
+          name="lastname"
+          ng-model="lastname"
+          required
+        />
+        <span ng-show="registerForm.lastname.$error.required"
+          >This is required!
+        </span>
+
+        <!-- city -->
+        <input
+          class="form-control registerInput"
+          placeholder="Your City"
+          type="text"
+          name="city"
+          ng-model="city"
+          required
+        />
+        <span ng-show="registerForm.city.$error.required"
+          >This is required!
+        </span>
+        <!-- country -->
+        <br />
+        <select name="country" form="registerForm" ng-model="chosenCountry">
+          <option value="">---Please select---</option>
+          <!-- not selected / blank option -->
+          <option
+            ng-repeat="country in possibleCountries"
+            value="{{ country }}"
+            type="text"
+          >
+            {{ country }}
+          </option>
+        </select>
+
+        <!-- email -->
+        <input
+          class="form-control registerInput"
+          placeholder="Your Email"
+          type="email"
+          name="email"
+          ng-model="email"
+          required
+        />
+        <span ng-show="registerForm.email.$error.required"
+          >This is required!
+        </span>
+        <br />
+        <!-- 
     <input class="form-control registerInput" type="text" name="username" ng-model="username" required>
     <span ng-show="registerForm.username.$error.required">This is required! </span>
-    <span ng-show="registerForm.username.$invalid">Invalid field</span>
 
     <input class="form-control registerInput" type="text" name="password" ng-model="password" required ng-minlength="8">
     <span ng-show="registerForm.password.$error.required">This is required! </span>
-    <span ng-show="registerForm.password.$error.minlength">Minimum length is 8 </span>
-    <span ng-show="registerForm.password.$invalid">Invalid field</span>
+    <span ng-show="registerForm.password.$error.minlength">Minimum length is 8 </span> -->
+        <!-- categories -->
+        <br /><label id="CategoriesAlert" style="font-size:10px"
+          >Choose at list Two Categories</label
+        ><br />
+        <div class="form-check" ng-repeat="cat in possibleCategories">
+          <input
+            class="ChosenCategory form-check-input"
+            name="{{ cat }}"
+            type="checkbox"
+            id="{{ cat }}"
+            value="{{ cat }}"
+          />
+          <label class="form-check-label" for="{{ cat }}">
+            {{ cat }}
+          </label>
+        </div>
 
-    <input class="form-control registerInput" type="text" name="city" ng-model="city" required>
-    <span ng-show="registerForm.city.$error.required">This is required! </span>
-    <span ng-show="registerForm.city.$invalid">Invalid field</span>
+        <!-- <input
+          class="form-check-input"
+          ng-repeat="category in possibleCategories"
+          type="checkbox"
+          value="{{ category }}"
+          name="{{ category }}"
+          id="{{ category }}"
+          placeholder="{{ country }}"
+        />
+        <label
+          ng-repeat="category in possibleCategories"
+          class="form-check-label"
+          for="{{ catergory }}"
+          >{{ category }}</label
+        > -->
 
-    <br>
-    <input class="btn btn-outline-primary" ng-disabled="registerForm.$invalid" type="submit" id="submit" value="Submit">
-</form>
-{{testVar}}
-</div>
-<div class="col-sm-3"></div>
-</div>
-    
+        <br />
+        <input
+          class="btn btn-outline-primary"
+          ng-disabled="registerForm.$invalid"
+          type="submit"
+          id="submit"
+          value="Submit"
+        />
+      </form>
+      {{ testVar }}
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
 </div>

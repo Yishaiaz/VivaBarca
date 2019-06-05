@@ -1,0 +1,31 @@
+<div class="container-fluid mx-auto">
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+      <div ng-repeat="poi in POIS">
+        <div class="container-fluid mx-auto SinglePOIInList" id="{{poi['poiID']}}" onclick="POIClicked(this)">
+          <div class="row">
+            <div
+              class="col-sm-12"
+            >
+              <img
+                class="poiListImage"
+                src="{{ poi['image'] }}"
+                alt=""
+                style="width:100%"
+              />
+              <h3 class="poiListTitle">{{ poi["name"] }}</h3>
+              <h6 class="poiListDescriptionTitle">What To expect<br></h6>
+              <h6 class="poiListDescription">{{ poi["description"] }}</h3>
+              <h6 class="poiListViewsNumberTitle">How Many Views<br></h6>
+              <h6 class="poiListViewsNumber">{{ poi["views"] }}</h3>
+              <h6 class="poiListRankTitle">Ranking<br></h6>
+              <h6 class="poiListRank">{{ poi["ranking"] }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+</div>

@@ -26,3 +26,42 @@
   margin-top: 10px;
 }
 /* END register screen style */
+
+/* START profile screen style */
+.profilePic {
+  width: 100px;
+  height: 100px;
+}
+/* END profile screen style */
+
+/* START poi list screen style */
+.poiListDescription,
+.poiListViewsNumber,
+.poiListRank {
+  font-size: 10px;
+}
+.poiListDescriptionTitle,
+.poiListViewsNumberTitle,
+.poiListRankTitle {
+  font-size: 14px;
+  color: #c0bff2;
+}
+.poiListTitle {
+  font-size: 20px;
+  color: #c0bff2;
+}
+.SinglePOIInList {
+  background-color: azure;
+  margin-top: 30px;
+  box-shadow: 3px 6px 10px rgba(0, 0, 0, 0.3);
+  height: 600px;
+  width: 400px;
+  border: 3px solid #c0bff2;
+}
+.poiListImage {
+  margin-top: 10px;
+  width: 380px;
+  height: 300px;
+}
+
+/* END profile screen style */
