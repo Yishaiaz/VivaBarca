@@ -1,0 +1,28 @@
+/* START home screen style */
+.homePage {
+}
+.homeTitleDiv {
+  height: 500px;
+  background-image: url("images/mainUpper.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  font-size: 20px;
+  text-align: center;
+  color: #c0bff2;
+  text-transform: uppercase;
+}
+/* END home screen style */
+
+/* START login screen style */
+.loginUsernameInput,
+.loginPasswordInput {
+  margin-top: 10px;
+}
+/* END login screen style */
+
+/* START register screen style */
+.registerInput {
+  margin-top: 10px;
+}
+/* END register screen style */

@@ -1,0 +1,27 @@
+<div class="container-fluid mx-auto" >
+<div class="row">
+<div class="col-sm-3"></div>
+<div class="col-sm-6">
+<form name="registerForm" ng-submit="submit()" novalidate>
+    <input class="form-control registerInput" type="text" name="username" ng-model="username" required>
+    <span ng-show="registerForm.username.$error.required">This is required! </span>
+    <span ng-show="registerForm.username.$invalid">Invalid field</span>
+
+    <input class="form-control registerInput" type="text" name="password" ng-model="password" required ng-minlength="8">
+    <span ng-show="registerForm.password.$error.required">This is required! </span>
+    <span ng-show="registerForm.password.$error.minlength">Minimum length is 8 </span>
+    <span ng-show="registerForm.password.$invalid">Invalid field</span>
+
+    <input class="form-control registerInput" type="text" name="city" ng-model="city" required>
+    <span ng-show="registerForm.city.$error.required">This is required! </span>
+    <span ng-show="registerForm.city.$invalid">Invalid field</span>
+
+    <br>
+    <input class="btn btn-outline-primary" ng-disabled="registerForm.$invalid" type="submit" id="submit" value="Submit">
+</form>
+{{testVar}}
+</div>
+<div class="col-sm-3"></div>
+</div>
+    
+</div>
