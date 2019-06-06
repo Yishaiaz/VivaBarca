@@ -1,23 +1,48 @@
-<div class="container-fluid mx-auto" >
-<div class="row">
-<div class="col-sm-3"></div>
-<div class="col-sm-6">
-<form name="loginForm" ng-submit="submit()" novalidate>
-    <input type="text" class="form-control loginUsernameInput" name="username" ng-model="username" required>
-    <span ng-show="loginForm.username.$error.required">This is required! </span>
-    <span ng-show="loginForm.username.$invalid">Invalid field</span>
-    <input type="text" class="form-control loginPasswordInput" name="password" ng-model="password" required ng-minlength="8">
-    <span ng-show="loginForm.password.$error.required">This is required! </span>
-    <span ng-show="loginForm.password.$error.minlength">Minimum length is 8 </span>
-    <span ng-show="loginForm.password.$invalid">Invalid field</span>
-    <br>
-    <input class="btn btn-outline-primary" ng-disabled="loginForm.$invalid" type="submit" id="submit" value="Submit">
-</form>
-    <a href="#!/register">Don't have a user yet? Join Us</a>
-</div>
-<div class="col-sm-3">
-{{testVar}}
-</div>
-</div>
-    
+<div class="container-fluid mx-auto">
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+      <form name="loginForm" ng-submit="submit()" novalidate>
+        <input
+          type="text"
+          class="form-control loginUsernameInput"
+          name="username"
+          ng-model="username"
+          required
+        />
+        <span ng-show="loginForm.username.$error.required"
+          >This is required!
+        </span>
+        <span ng-show="loginForm.username.$invalid">Invalid field</span>
+        <!-- todo: change min length to 8 again -->
+        <input
+          type="text"
+          class="form-control loginPasswordInput"
+          name="password"
+          ng-model="password"
+          required
+          ng-minlength="1"
+        />
+        <span ng-show="loginForm.password.$error.required"
+          >This is required!
+        </span>
+        <span ng-show="loginForm.password.$error.minlength"
+          >Minimum length is 8
+        </span>
+        <span ng-show="loginForm.password.$invalid">Invalid field</span>
+        <br />
+        <input
+          class="btn btn-outline-primary"
+          ng-disabled="loginForm.$invalid"
+          type="submit"
+          id="submit"
+          value="Submit"
+        />
+      </form>
+      <a href="#!/register">Don't have a user yet? Join Us</a>
+    </div>
+    <div class="col-sm-3">
+      {{ testVar }}
+    </div>
+  </div>
 </div>

@@ -32,5 +32,10 @@ mainApp.config(function($routeProvider) {
   });
 });
 mainApp.controller("mainCtrl", function($scope) {
-  $scope.name = "testing name";
+  var userData = localStorage.getItem("userData");
+  if (userData) {
+    console.log(userData);
+  } else {
+    console.log("no user");
+  }
 });
