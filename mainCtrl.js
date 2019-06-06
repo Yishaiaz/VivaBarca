@@ -25,6 +25,11 @@ mainApp.config(function($routeProvider) {
     controller: "POIListCtrl",
     controllerAs: "ctrl"
   });
+  $routeProvider.when("/SinglePOI/:id", {
+    templateUrl: "pages/singlePOI.html",
+    controller: "SinglePOICtrl",
+    controllerAs: "ctrl"
+  });
 });
 mainApp.controller("mainCtrl", function($scope) {
   $scope.name = "testing name";
