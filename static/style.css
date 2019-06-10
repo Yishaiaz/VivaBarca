@@ -1,3 +1,13 @@
+/* START index screen style */
+
+.usernameNavBarDisplay {
+  font-size: 10px;
+  color: aqua;
+  margin-left: 20px;
+}
+
+/* END index screen style */
+
 /* START home screen style */
 .homePage {
 }
@@ -11,6 +21,11 @@
   text-align: center;
   color: #c0bff2;
   text-transform: uppercase;
+}
+#registerPleaDiv,
+#newUserPopularPois,
+#twoPopularPOISTwoDifferentCategories {
+  padding: 30px;
 }
 /* END home screen style */
 
@@ -52,9 +67,9 @@
 }
 .SinglePOIInList {
   background-color: azure;
-  margin-top: 30px;
+  margin-left: 10px;
   box-shadow: 3px 6px 10px rgba(0, 0, 0, 0.3);
-  height: 600px;
+  height: 450px;
   width: 400px;
   border: 3px solid #c0bff2;
 }
@@ -63,8 +78,12 @@
   width: 380px;
   height: 300px;
 }
-
-/* END profile screen style */
+.submitSearchButton {
+  background-image: url("images/magnifyingGlassIcon.png");
+  background-size: cover;
+  border-color: transparent;
+}
+/* END poi list screen style */
 
 /* START single poi screen style */
 .reviewInstruction {
@@ -74,5 +93,13 @@
 .newReviewDescription {
   width: 100%;
   height: 100px;
+}
+.SinglePOI {
+  margin-top: 10px;
+  width: 380px;
+  height: auto;
+  background-color: azure;
+  box-shadow: 3px 6px 10px rgba(0, 0, 0, 0.3);
+  border: 3px solid #c0bff2;
 }
 /* END single poi screen style */

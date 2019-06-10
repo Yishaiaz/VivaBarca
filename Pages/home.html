@@ -1,17 +1,105 @@
 <div class="container-fluid mx-auto p-0 homePage">
-    <div class="row homeTitleDiv">
-        <div class="col-sm-12">
-            <h1 style="margin-top:100px; font-size:50px">Welcome!</h1>
-            <p style="margin-top:20px;color:white;">this is a website to help you, a very lazy person<br>to know all about barcelona!</p>
-        </div>
+  <div class="row homeTitleDiv">
+    <div class="col-sm-12">
+      <h1 style="margin-top:100px; font-size:50px">Welcome!</h1>
+      <p style="margin-top:20px;color:white;">
+        this is a website to help you, a very lazy person<br />to know all about
+        barcelona!
+      </p>
     </div>
-    <div class="row">
+  </div>
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+      
+        
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+  <div class="row" id="registerPleaDiv" ng-hide="isLoggedIn">
         <div class="col-sm-1"></div>
         <div class="col-sm-10">
-            <h3>Welcome to barcelona</h3>
-            <p> a very nice city indeed.
-            </p>
+                <p>
+                        Ever considered registering to our site? if you already have a user, Log
+                        In :). <br />if not, come and join us at the wonderfull community of
+                        'Viva La Barca' which is about Paris, which is fun enough reason to
+                        join!
+                      </p>
+            
         </div>
         <div class="col-sm-1"></div>
     </div>
+    <div class="row" id="newUserPopularPois" ng-hide="isLoggedIn">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <div class="container-fluid mx-auto p-0">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>Explore Paris:</h4>
+                        <h6 style="font-size:10px">See the most popular sites</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4" ng-repeat="poi in poisToShowToNewUser">
+                        <div class="container-fluid mx-auto" id="{{poi['poiID']}}" ng-click="goToPoiPage($event)">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <img src="{{poi['image']}}" alt="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h3>{{poi['name']}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row" id="userPopularPois" ng-hide="!isLoggedIn">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="container-fluid mx-auto p-0">
+                    <div class="row" style="margin:50px;">
+                        <div class="col-sm-12">
+                            <h6>Two Random points from two categories:</h6>
+                        </div>    
+                    </div>
+                    <div class="row" id="twoPopularPOISTwoDifferentCategories">
+                        <div class="col-sm-4" ng-repeat="poi in twoPopularPOIS">
+                            <div class="container-fluid mx-auto" id="{{poi['poiID']}}" ng-click="goToPoiPage($event)">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <img src="{{poi['image']}}" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h3>{{poi['name']}}</h3>
+                                        <h3>Category: {{poi['categoryName']}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin:50px;">
+                            <div class="col-sm-12">
+                                <h6>Two Favourite points by user:</h6>
+                            </div>    
+                        </div>
+                    <div class="row" id="twoLastSavedPOIS">
+                        <div class="col-sm-4" ng-repeat="poi in poisToShowToUser">
+                            <div class="container-fluid mx-auto" id="{{poi['poiID']}}" ng-click="goToPoiPage($event)">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+  </div>
 </div>
