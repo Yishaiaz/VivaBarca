@@ -1,82 +1,78 @@
 <div class="container-fluid mx-auto">
-<!-- search bar -->
-<div class="row SearchBarDiv">
+  <!-- search bar -->
+  <div class="row SearchBarDiv">
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
-        <form name="searchBarForm" ng-submit="submitSearch()" novalidate>
-            <input 
-            style="width: 90%"
-            class="form-control searchInput"
-            placeholder="Search..."
-            type="text"
-            name="searchBox"
-            ng-model="searchBox"
-            required>
-            <input 
-            class="submitSearchButton"
-            ng-disabled="searchBarForm.$invalid"
-            type="submit"
-            id="submit"
-            value="GO">
-          </form>
+      <form name="searchBarForm" ng-submit="submitSearch()" novalidate>
+        <input
+          style="width: 90%"
+          class="form-control searchInput"
+          placeholder="Search..."
+          type="text"
+          name="searchBox"
+          ng-model="searchBox"
+          required
+        />
+        <input
+          class="submitSearchButton"
+          ng-disabled="searchBarForm.$invalid"
+          type="submit"
+          id="submit"
+          value="GO"
+        />
+      </form>
     </div>
     <div class="col-sm-1"></div>
   </div>
 
+  <div class="row filterByCategoriesDiv">
+    <div class="col-sm-1"></div>
+    <div ng-repeat="category in categoriesList" class="col-sm-1.5">
+      <button class="btn btn-toolbar">{{ category["categoryName"] }}</button>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
   <div class="row">
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
-<!-- filtered pois -->
-        <div ng-repeat="poi in POIsAfterFiltering" ng-hide="!bySearchFilter" class="SinglePOIInList">
-            <div class="container-fluid mx-auto SinglePOIInList" id="{{poi['poiID']}}" ng-click="POIClicked($event)">
-              <div class="row">
-                <div
-                  class="col-sm-12"
-                >
-                  <img
-                    class="poiListImage"
-                    src="{{ poi['image'] }}"
-                    alt=""
-                    style="width:100%"
-                  />
-                  <h3 class="poiListTitle">{{ poi["name"] }}</h3>
-                  <!-- <h6 class="poiListDescriptionTitle">What To expect<br></h6> -->
-                  <!-- <h6 class="poiListDescription">{{ poi["description"] }}</h3> -->
-                  <h6 class="poiListViewsNumberTitle">How Many Views<br></h6>
-                  <h6 class="poiListViewsNumber">{{ poi["views"] }}</h3>
-                  <h6 class="poiListRankTitle">Ranking<br></h6>
-                  <h6 class="poiListRank">{{ poi["ranking"] }}</h3>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      <!--  all the pois-->
-      <div ng-repeat="poi in allPoisData" ng-hide="bySearchFilter">
-        <div class="container-fluid mx-auto SinglePOIInList" id="{{poi['poiID']}}" ng-click="POIClicked($event)">
+      <!-- POIS by Category -->
+      <div ng-repeat="category in POIsByCategory" class="CategoryListDiv">
+        <div class="container-fluid mx-auto singleCategoryListDiv" id="{{ category['categoryName'] }}">
           <div class="row">
-            <div
-              class="col-sm-12"
-            >
-              <img
-                class="poiListImage"
-                src="{{ poi['image'] }}"
-                alt=""
-                style="width:100%"
-              />
-              <h3 class="poiListTitle">{{ poi["name"] }}</h3>
-              <!-- <h6 class="poiListDescriptionTitle">What To expect<br></h6> -->
-              <!-- <h6 class="poiListDescription">{{ poi["description"] }}</h3> -->
-              <h6 class="poiListViewsNumberTitle">How Many Views<br></h6>
-              <h6 class="poiListViewsNumber">{{ poi["views"] }}</h3>
-              <h6 class="poiListRankTitle">Ranking<br></h6>
-              <h6 class="poiListRank">{{ poi["ranking"] }}</h3>
+            <div class="col-sm-12">
+              <h1>Category : {{ category["categoryName"] }}</h1>
+              <div ng-repeat="poi in category['categoryData']" class="CategoryListDiv">
+                  <div class="container-fluid mx-auto SinglePOIInList" >
+                      <div class="row">
+                        <div
+                          class="col-sm-6"
+                        >
+                          <img
+                          ng-click="POIClicked($event)"
+                            class="poiListImage"
+                            src="{{ poi['image'] }}"
+                            id="{{poi['poiID']}}"
+                            alt=""
+                            style="width:100%"
+                          />
+                        </div>
+                        <div class="col-sm-6">
+                            <h3 class="poiListTitle">{{ poi["name"] }}</h3>              
+                          <h6 class="poiListViewsNumberTitle">How Many Views<br></h6>
+                          <h6 class="poiListViewsNumber">{{ poi["views"] }}</h3>
+                          <h6 class="poiListRankTitle">Ranking<br></h6>
+                          <h6 class="poiListRank">{{ poi["ranking"] }}</h3>
+                          <button class="isUserFavouriteIcon" ng-click="addToFavourites($event)" id="{{poi['poiID']}}" ng-disabled="{{isLoggedIn}}"><i class="fa fa-star-o"></i></button>
+                        </div>
+                          
+                        
+                      </div>
+                    </div>
+                  </div>
+              </div> 
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-1"></div>
   </div>
-</div>

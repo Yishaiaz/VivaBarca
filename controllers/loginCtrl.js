@@ -1,7 +1,6 @@
 angular
   .module("mainApp")
   .controller("loginCtrl", function($scope, $http, $window) {
-    $scope.testVar = "not Changed";
     $scope.submit = function() {
       $scope.credentials = {
         username: $scope.username,

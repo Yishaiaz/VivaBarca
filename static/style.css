@@ -53,35 +53,46 @@
 .poiListDescription,
 .poiListViewsNumber,
 .poiListRank {
-  font-size: 10px;
+  font-size: 17px;
 }
 .poiListDescriptionTitle,
 .poiListViewsNumberTitle,
 .poiListRankTitle {
-  font-size: 14px;
-  color: #c0bff2;
-}
-.poiListTitle {
   font-size: 20px;
   color: #c0bff2;
 }
+.poiListTitle {
+  font-size: 30px;
+  color: #c0bff2;
+}
+.filterByCategoriesDiv {
+  margin: 20px;
+  padding: 5px;
+}
 .SinglePOIInList {
   background-color: azure;
-  margin-left: 10px;
+  margin-top: 20px;
   box-shadow: 3px 6px 10px rgba(0, 0, 0, 0.3);
   height: 450px;
-  width: 400px;
+  width: auto;
   border: 3px solid #c0bff2;
 }
 .poiListImage {
   margin-top: 10px;
-  width: 380px;
-  height: 300px;
+  width: auto;
+  height: auto;
 }
 .submitSearchButton {
   background-image: url("images/magnifyingGlassIcon.png");
   background-size: cover;
   border-color: transparent;
+}
+.listPOIDataDiv {
+  padding: 20px;
+}
+.isUserFavouriteIcon {
+  background-color: transparent !important;
+  border-color: transparent !important;
 }
 /* END poi list screen style */
 
