@@ -37,6 +37,7 @@ mainApp.config(function($routeProvider) {
   });
 });
 mainApp.controller("mainCtrl", function($scope, $http, $window) {
+  console.log(localStorage);
   // helper functions
   $scope.goToPoiPage = function(event) {
     let poiId = event.currentTarget.id;
@@ -53,6 +54,14 @@ mainApp.controller("mainCtrl", function($scope, $http, $window) {
   // checks user token data exist on local storage
   if ($scope.userData && $scope.userData != {}) {
     $scope.userData = JSON.parse($scope.userData);
+    $scope.NumberOfFavouritePOIs = JSON.parse(
+      localStorage.getItem("usersFavouritePOIs")
+    );
+    if ($scope.NumberOfFavouritePOIs != null) {
+      $scope.NumberOfFavouritePOIs = $scope.NumberOfFavouritePOIs.length;
+    } else {
+      $scope.NumberOfFavouritePOIs = 0;
+    }
     document.getElementById("navUsername").innerText =
       $scope.userData["username"];
     $scope.isLoggedIn = true;
@@ -65,7 +74,6 @@ mainApp.controller("mainCtrl", function($scope, $http, $window) {
     }).then(
       function mySuccess(response) {
         $scope.POIData = response.data["POIs"];
-        $scope.twoPopularPOIS = $scope.POIData;
       },
       function myError(response) {
         // $scope.twoPopularPOIS = response.statusText;
@@ -81,8 +89,8 @@ mainApp.controller("mainCtrl", function($scope, $http, $window) {
     }).then(
       function mySuccess(response) {
         $scope.POIData = response.data["response"];
+        $scope.NumberOfFavouritePOIs = $scope.POIData.length;
         for (let i = 0; i < $scope.POIData.length; i++) {
-          console.log($scope.POIData[i]["username"]);
           // todo: change api call to the right one and extract data.
         }
       },
@@ -110,5 +118,6 @@ mainApp.controller("mainCtrl", function($scope, $http, $window) {
 });
 function logoutUser() {
   localStorage.setItem("userData", {});
+  localStorage.removeItem("usersFavouritePOIs", {});
   location.reload();
 }

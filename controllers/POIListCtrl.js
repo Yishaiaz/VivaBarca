@@ -3,8 +3,36 @@ angular
   .controller("POIListCtrl", function($scope, $http, $window) {
     //USER TOKEN//
     $scope.isLoggedIn = false;
-    $scope.userData = localStorage.getItem("userData");
+
+    // USER IS LOGGED IN
     if ($scope.userData && $scope.userData != {}) {
+      $scope.userData = JSON.parse(localStorage.getItem("userData"));
+      $scope.isLoggedIn = true;
+      // GET USER FAVOURITE POI
+      var req = {
+        method: "POST",
+        url: "http://localhost:3000/Analysis/getFavoritePOIs",
+        headers: {
+          "x-auth-token": $scope.userData["token"]
+        }
+      };
+      $http(req).then(
+        function mySuccess(response) {
+          $scope.userFavouritePOIsID = [];
+          for (let j = 0; j < response.data["response"].length; j++) {
+            $scope.userFavouritePOIsID.push(
+              response.data["response"][j]["poiID"]
+            );
+          }
+        },
+        function myError(response) {
+          console.log(response);
+        }
+      );
+
+      // USER ISN'T LOGGED IN
+    } else {
+      $scope.isLoggedIn = false;
     }
 
     $scope.bySearchFilter = false;
@@ -59,6 +87,7 @@ angular
             }
           );
         }
+        $scope.allPoisData = $scope.POIsByCategory;
       },
       function myError(response) {
         $scope.allPoisData = response.statusText;
@@ -67,6 +96,7 @@ angular
     );
 
     // SEARCH FUNCTION INTIATED, FILTER BY TEXT CONTAINED IN THE NAME OF THE POI
+    //todo fit to new by category presentation
     $scope.submitSearch = function() {
       var searchKeyWord = $scope.searchBox;
       $scope.POIsAfterFiltering = [];
@@ -90,17 +120,70 @@ angular
       var allFavouriteButtons = document.getElementsByClassName(
         "isUserFavouriteIcon"
       );
+      let idToAddToFavourites;
+      let toRemove = false;
       for (let i = 0; i < allFavouriteButtons.length; i++) {
         if (allFavouriteButtons[i].id === event.currentTarget.id) {
           if (
             allFavouriteButtons[i].childNodes[0].className === "fa fa-star-o"
           ) {
             allFavouriteButtons[i].childNodes[0].className = "fa fa-star";
+            idToAddToFavourites = allFavouriteButtons[i].id;
           } else {
             allFavouriteButtons[i].childNodes[0].className = "fa fa-star-o";
+            idToAddToFavourites = allFavouriteButtons[i].id;
+            toRemove = true;
           }
         }
       }
-      // todo: add the http method to add to user favourite.
+
+      // SAVING TO LOCAL STORAGE
+      var POIsToAddToLCL;
+      let exists = false;
+      try {
+        POIsToAddToLCL = JSON.parse(localStorage.getItem("usersFavouritePOIs"));
+        if (POIsToAddToLCL == null) {
+          POIsToAddToLCL = [];
+        }
+        exists = true;
+      } catch {
+        exists = false;
+      }
+      if (!exists) {
+        POIsToAddToLCL = [
+          {
+            poiID: idToAddToFavourites
+          }
+        ];
+      } else {
+        if (!toRemove) {
+          // checks if already exists before pushing it
+          let toAdd = true;
+          for (let k = 0; k < POIsToAddToLCL.length; k++) {
+            if (POIsToAddToLCL[k]["poiID"] == idToAddToFavourites) {
+              toAdd = false;
+            }
+          }
+          if (toAdd) {
+            POIsToAddToLCL.push({
+              poiID: parseInt(idToAddToFavourites)
+            });
+          }
+        } else {
+          let index = -1;
+          for (let k = 0; k < POIsToAddToLCL.length; k++) {
+            if (POIsToAddToLCL[k]["poiID"] == idToAddToFavourites) {
+              index = k;
+            }
+          }
+          if (index > -1) {
+            POIsToAddToLCL.splice(index, 1);
+          }
+        }
+      }
+      localStorage.setItem(
+        "usersFavouritePOIs",
+        JSON.stringify(POIsToAddToLCL)
+      );
     };
   });

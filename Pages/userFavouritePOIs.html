@@ -1,0 +1,54 @@
+<div class="container-fluid mx-auto">
+  <div class="row" ng-hide="{{isLoggedIn}}">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+      <h3>Too bad...</h3>
+      <h3>It seems like you're not logged in.</h3>
+      <a href="#!/login" class="btn btn-dark"> Login </a>
+    </div>
+    <div class="col-sm-4"></div>
+  </div>
+  <div class="row" ng-hide="FavouritePOIsExists">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <h3>Too bad...</h3>
+        <p>It seems like you don't have any favourite points of interests, go check some out!.</p>
+        <a href="#!/POIS" class="btn btn-dark"> GO </a>
+      </div>
+      <div class="col-sm-4"></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">
+      <button class="btn btn-dark saveFavToDBBTN" ng-click="saveFavouritesToDB($event)">Save to DB</button>
+    </div>
+    <div class="col-sm-9">
+            <div ng-repeat="poi in userFavPOIs|orderBy:'rank'" class="favouritePOI">
+                    <div class="container-fluid mx-auto SinglePOIInList" >
+                        <div class="row">
+                          <div
+                            class="col-sm-6"
+                          >
+                            <img
+                            ng-click="POIClicked($event)"
+                              class="poiListImage"
+                              src="{{ poi['image'] }}"
+                              id="{{poi['poiID']}}"
+                              alt=""
+                              style="width:100%"
+                            />
+                          </div>
+                          <div class="col-sm-6">
+                              <h3 class="poiListTitle">{{ poi["name"] }}</h3>              
+                            <h6 class="poiListViewsNumberTitle">How Many Views<br></h6>
+                            <h6 class="poiListViewsNumber">{{ poi["views"] }}</h3>
+                            <h6 class="poiListRankTitle">Ranking<br></h6>
+                            <h6 class="poiListRank">{{ poi["ranking"] }} %</h3>
+                            <button class="isUserFavouriteIcon" ng-click="removeFromFavourites($event)" id="{{poi['poiID']}}"><i class="fa fa-star"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+</div>

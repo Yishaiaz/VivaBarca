@@ -114,3 +114,10 @@
   border: 3px solid #c0bff2;
 }
 /* END single poi screen style */
+
+/* START FAVOURITE poiS screen style */
+.saveFavToDBBTN {
+  margin: 30px;
+}
+
+/* END FAVOURITE poiS screen style */
