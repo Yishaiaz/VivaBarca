@@ -123,6 +123,10 @@ angular
         );
       }
     };
+    // A POI IMAGE WAS CLICKED, REDIRECTED TO SINGLE POI PAGE
+    $scope.POIClicked = function(event) {
+      $window.location.href = "#!/SinglePOI/" + event.currentTarget.id;
+    };
     // REMOVES ONLY FROM LCL STORAGE
     $scope.removeFromFavourites = function(event) {
       console.log(event.currentTarget.id);

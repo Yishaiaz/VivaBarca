@@ -72,7 +72,7 @@ mainApp.controller("mainCtrl", function($scope, $http, $window) {
       headers: { "x-auth-token": $scope.userData["token"] }
     }).then(
       function mySuccess(response) {
-        $scope.POIData = response.data["POIs"];
+        $scope.twoPopularPOIS = response.data["POIs"];
       },
       function myError(response) {
         // $scope.twoPopularPOIS = response.statusText;
@@ -83,18 +83,28 @@ mainApp.controller("mainCtrl", function($scope, $http, $window) {
     // getting two favourite pois in two different categories to a logged user, if don't exist, changes a scope flag
     $http({
       method: "POST",
-      url: "http://localhost:3000/Analysis/getFavoritePOIs",
+      url: "http://localhost:3000/Analysis/getLastUsedPOIs",
       headers: { "x-auth-token": $scope.userData["token"] }
     }).then(
       function mySuccess(response) {
-        $scope.POIData = response.data["response"];
+        $scope.favouritePOISByTwoCategories = response.data["POIs"];
+        console.log($scope.favouritePOISByTwoCategories);
+        // there are user favourite pois
+        if ($scope.favouritePOISByTwoCategories.length > 0) {
+          $scope.presentNoFavouritesYet = false;
+        }
+        // there are no user favourite pois
+        else {
+          $scope.presentNoFavouritesYet = true;
+        }
         $scope.NumberOfFavouritePOIs = $scope.POIData.length;
         for (let i = 0; i < $scope.POIData.length; i++) {
           // todo: change api call to the right one and extract data.
         }
       },
       function myError(response) {
-        console.log("failed");
+        $scope.presentNoFavouritesYet = true;
+        console.log(response.statusText);
       }
     );
   } else {

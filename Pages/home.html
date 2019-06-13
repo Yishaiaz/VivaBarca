@@ -86,14 +86,35 @@
                         </div>
                     </div>
                     <div class="row" style="margin:50px;">
-                            <div class="col-sm-12">
-                                <h6>Two Favourite points by user:</h6>
-                            </div>    
-                        </div>
+                        <div class="col-sm-12">
+                            <h6>Two Favourite points by user:</h6>
+                        </div>    
+                    </div>
                     <div class="row" id="twoLastSavedPOIS">
-                        <div class="col-sm-4" ng-repeat="poi in poisToShowToUser">
+                        <div ng-show="presentNoFavouritesYet">
+                            <div class="container-fluid mx-auto">
+                                <div class="row">
+                                    <div class="sm-4"></div>
+                                    <div class="sm-8">
+                                        <h3>It's seems like you don't have anything saved to favourites!</h3>
+                                        <a href="#/POIS">Go Explore Paris!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4" ng-repeat="poi in favouritePOISByTwoCategories">
                             <div class="container-fluid mx-auto" id="{{poi['poiID']}}" ng-click="goToPoiPage($event)">
-                                
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <img src="{{poi['image']}}" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h3>{{poi['name']}}</h3>
+                                        <h3>Category: {{poi['categoryName']}}</h3>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -101,5 +122,8 @@
             </div>
             <div class="col-sm-1"></div>
         </div>
-  </div>
+    <br>
+    <br>
 </div>
+  
+
