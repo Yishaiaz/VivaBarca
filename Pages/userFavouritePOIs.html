@@ -19,10 +19,26 @@
   </div>
   <div class="row">
     <div class="col-sm-2">
-      <button class="btn btn-dark saveFavToDBBTN" ng-click="saveFavouritesToDB($event)">Save to DB</button>
+      
     </div>
+    <div class="row filterByCategoriesDiv" ng-show="{{isLoggedIn}}">
+        
+        <!-- <div ng-repeat="category in categoriesList" class="col-sm-1.5"> MAYBE TODO
+          <button class="btn btn-toolbar" id="{{category['categoryName']}}" ng-click="byCategoryClicked($event)">{{ category["categoryName"] }}</button>
+        </div> -->
+        <div class="col-sm-4">
+          <button class="btn btn-toolbar" ng-click="sortByRank($event)">Sort By Ranking</button>
+        </div>
+        <div class="col-sm-4">
+            <button class="btn btn-toolbar" ng-click="saveOrderToDB($event)">Save order to the DB</button>
+        </div>
+        <div class="col-sm-4">
+            <button class="btn btn-toolbar" ng-click="saveFavouritesToDB($event)">Save to DB</button>
+        </div>
+      </div>
     <div class="col-sm-9">
-            <div ng-repeat="poi in userFavPOIs|orderBy:'rank'" class="favouritePOI">
+      <!-- REGULAR PRESENTATION -->
+            <div ng-repeat="poi in userFavPOIs" class="favouritePOI" ng-hide="bySearchFilter">
                     <div class="container-fluid mx-auto SinglePOIInList" >
                         <div class="row">
                           <div
@@ -37,7 +53,7 @@
                               style="width:100%"
                             />
                           </div>
-                          <div class="col-sm-6">
+                          <div class="col-sm-5">
                               <h3 class="poiListTitle">{{ poi["name"] }}</h3>              
                             <h6 class="poiListViewsNumberTitle">How Many Views<br></h6>
                             <h6 class="poiListViewsNumber">{{ poi["views"] }}</h3>
@@ -45,9 +61,42 @@
                             <h6 class="poiListRank">{{ poi["ranking"] }} %</h3>
                             <button class="isUserFavouriteIcon" ng-click="removeFromFavourites($event)" id="{{poi['poiID']}}"><i class="fa fa-star"></i></button>
                           </div>
+                          <div class="col-sm-1 orderInputDiv">
+                            <input class="orderNumberForPOI" id="poi['poiID']" type="number" value="{{poi['position']}}">
+                          </div>
                         </div>
                       </div>
                     </div>
+<!-- BY FILTER REPRESENTATION -->
+                    <div ng-repeat="poi in POIsByFilter" class="favouritePOI" ng-show="bySearchFilter">
+                        <div class="container-fluid mx-auto SinglePOIInList" >
+                            <div class="row">
+                              <div
+                                class="col-sm-6"
+                              >
+                                <img
+                                ng-click="POIClicked($event)"
+                                  class="poiListImage"
+                                  src="{{ poi['image'] }}"
+                                  id="{{poi['poiID']}}"
+                                  alt=""
+                                  style="width:100%"
+                                />
+                              </div>
+                              <div class="col-sm-5">
+                                  <h3 class="poiListTitle">{{ poi["name"] }}</h3>              
+                                <h6 class="poiListViewsNumberTitle">How Many Views<br></h6>
+                                <h6 class="poiListViewsNumber">{{ poi["views"] }}</h3>
+                                <h6 class="poiListRankTitle">Ranking<br></h6>
+                                <h6 class="poiListRank">{{ poi["ranking"] }} %</h3>
+                                <button class="isUserFavouriteIcon" ng-click="removeFromFavourites($event)" id="{{poi['poiID']}}"><i class="fa fa-star"></i></button>
+                              </div>
+                              <div class="col-sm-1 orderInputDiv">
+                                  <input class="orderNumberForPOI" type="number" value="{{poi['position']}}">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
     </div>
     <div class="col-sm-1"></div>
   </div>

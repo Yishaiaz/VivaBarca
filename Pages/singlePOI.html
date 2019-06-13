@@ -38,9 +38,16 @@
                 </div>
               </div>
           </div>
+          <div class="row" ng-show="!isLoggedIn">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-8">
+                  <h6 style="color:chartreuse; font-size:15px">Log in to use the extra fetures below </h6>
+              </div>
+              <div class="col-sm-2"></div>
+          </div>
           <div class="row actionButtonsRow">
               <div class="col-sm-6">
-                  <button class="btn btn-dark isUserFavouriteButton" id="{{POIData['poiID']}}" ng-click="addToFavourites($event)">Add to Favourites</button>
+                  <button class="btn btn-dark isUserFavouriteButton" id="{{POIData['poiID']}}" ng-disabled="!isLoggedIn" ng-click="addToFavourites($event)" title="Registerd users can have favourite POIs">Add to Favourites</button>
               </div>
               <div class="col-sm-6">
                     <button type="button" class="btn btn-dark"  data-toggle="modal" data-target="#writeReviewModal" title="Write a review" ng-disabled="!isLoggedIn" title="Write a review">Ever been here?</button>

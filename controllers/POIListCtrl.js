@@ -1,6 +1,7 @@
 angular
   .module("mainApp")
   .controller("POIListCtrl", function($scope, $http, $window) {
+    $scope.orderBy = "ranking";
     $scope.bySearchFilter = false;
     $scope.presentNoSearchResults = false;
 
@@ -226,5 +227,21 @@ angular
         "usersFavouritePOIs",
         JSON.stringify(POIsToAddToLCL)
       );
+    };
+    $scope.sortByRank = function(event) {
+      if (
+        $scope.POIsByCategoryAndFilter == [] ||
+        $scope.POIsByCategoryAndFilter == null
+      ) {
+        $scope.POIsByCategoryAndFilter = $scope.POIsByCategory;
+      }
+
+      for (let i = 0; i < $scope.POIsByCategoryAndFilter.length; i++) {
+        var sortedList = $scope.POIsByCategoryAndFilter[i]["categoryData"];
+        sortedList.sort((a, b) => (a["ranking"] > b["ranking"] ? 1 : -1));
+        $scope.POIsByCategoryAndFilter[i]["categoryData"] = sortedList;
+      }
+
+      $scope.bySearchFilter = true;
     };
   });

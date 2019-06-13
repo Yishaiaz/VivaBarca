@@ -3,6 +3,18 @@
     <div class="col-sm-3"></div>
     <div class="col-sm-6">
       <form name="registerForm" ng-submit="submit()" novalidate>
+        <!-- password -->
+        <input
+          class="form-control registerInput"
+          placeholder="Password"
+          type="password"
+          name="password"
+          ng-model="password"
+          required
+        />
+        <span ng-show="registerForm.firstname.$error.required"
+          >This is required!
+        </span>
         <!-- firstname -->
         <input
           class="form-control registerInput"
@@ -47,10 +59,10 @@
           <!-- not selected / blank option -->
           <option
             ng-repeat="country in possibleCountries"
-            value="{{ country }}"
+            value="{{ country['countryID'] }}"
             type="text"
           >
-            {{ country }}
+            {{ country["countryName"] }}
           </option>
         </select>
 
@@ -74,14 +86,71 @@
         <div class="form-check" ng-repeat="cat in possibleCategories">
           <input
             class="ChosenCategory form-check-input"
-            name="{{ cat }}"
+            name="{{ cat['categoryName'] }}"
             type="checkbox"
-            id="{{ cat }}"
-            value="{{ cat }}"
+            id="{{ cat['categoryName'] }}"
+            value="{{ cat['categoryName'] }}"
           />
-          <label class="form-check-label" for="{{ cat }}">
-            {{ cat }}
+          <label class="form-check-label" for="{{ cat['categoryName'] }}">
+            {{ cat["categoryName"] }}
           </label>
+        </div>
+
+        <br />
+        <!-- Q&A1 -->
+        <div>
+          <!-- question -->
+          <select
+            name="firstQuestion"
+            form="registerForm"
+            ng-model="firstQuestion"
+          >
+            <option value="">---Please select first question---</option>
+            <!-- not selected / blank option -->
+            <option
+              ng-repeat="question in possibleQuestions"
+              value="{{ question['questionBody'] }}"
+              type="text"
+            >
+              {{ question["questionBody"] }}
+            </option>
+          </select>
+          <input
+            class="form-control registerInput"
+            placeholder="Your Answer"
+            type="text"
+            name="firstAnswer"
+            ng-model="firstAnswer"
+            required
+          />
+        </div>
+        <br />
+        <!-- Q&A2 -->
+        <div>
+          <!-- question -->
+          <select
+            name="secondQuestion"
+            form="registerForm"
+            ng-model="secondQuestion"
+          >
+            <option value="">---Please select second question---</option>
+            <!-- not selected / blank option -->
+            <option
+              ng-repeat="question in possibleQuestions"
+              value="{{ question['questionBody'] }}"
+              type="text"
+            >
+              {{ question["questionBody"] }}
+            </option>
+          </select>
+          <input
+            class="form-control registerInput"
+            placeholder="Your Answer"
+            type="text"
+            name="secondAnswer"
+            ng-model="secondAnswer"
+            required
+          />
         </div>
 
         <br />

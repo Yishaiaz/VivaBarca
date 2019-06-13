@@ -30,6 +30,9 @@
     <div ng-repeat="category in categoriesList" class="col-sm-1.5">
       <button class="btn btn-toolbar" id="{{category['categoryName']}}" ng-click="byCategoryClicked($event)">{{ category["categoryName"] }}</button>
     </div>
+    <div>
+      <button class="btn btn-toolbar" ng-click="sortByRank($event)">By Ranking</button>
+    </div>
     <div class="col-sm-1"></div>
   </div>
   <div class="row">

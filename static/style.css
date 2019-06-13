@@ -135,8 +135,8 @@ h3 {
 /* END single poi screen style */
 
 /* START FAVOURITE poiS screen style */
-.saveFavToDBBTN {
-  margin: 30px;
+.orderNumberForPOI {
+  width: 40px;
 }
 
 /* END FAVOURITE poiS screen style */
