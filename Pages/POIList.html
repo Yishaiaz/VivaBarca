@@ -28,7 +28,7 @@
   <div class="row filterByCategoriesDiv">
     <div class="col-sm-1"></div>
     <div ng-repeat="category in categoriesList" class="col-sm-1.5">
-      <button class="btn btn-toolbar">{{ category["categoryName"] }}</button>
+      <button class="btn btn-toolbar" id="{{category['categoryName']}}" ng-click="byCategoryClicked($event)">{{ category["categoryName"] }}</button>
     </div>
     <div class="col-sm-1"></div>
   </div>
@@ -36,7 +36,7 @@
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
       <!-- POIS by Category -->
-      <div ng-repeat="category in POIsByCategory" class="CategoryListDiv">
+      <div ng-repeat="category in POIsByCategory" class="CategoryListDiv" ng-hide="bySearchFilter">
         <div class="container-fluid mx-auto singleCategoryListDiv" id="{{ category['categoryName'] }}">
           <div class="row">
             <div class="col-sm-12">
@@ -75,7 +75,7 @@
         </div>
 
         <!-- POIS BY CATEGORY AND FILTERED BY SEARCH -->
-        <div ng-repeat="category in POIsByCategoryAndFilter" class="CategoryListDiv">
+        <div ng-repeat="category in POIsByCategoryAndFilter" class="CategoryListDiv" ng-show="bySearchFilter">
             <div class="container-fluid mx-auto singleCategoryListDiv" id="{{ category['categoryName'] }}">
               <div class="row">
                 <div class="col-sm-12">
@@ -111,6 +111,10 @@
                   </div> 
                 </div>
               </div>
+            </div>
+            <div ng-show="presentNoSearchResults">
+              <h1>It seems like no search results were found... maybe try something different?</h1>
+              <a href="#!/">Or go explore Paris!</a>
             </div>
       </div>
     </div>

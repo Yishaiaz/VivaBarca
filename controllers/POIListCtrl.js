@@ -1,6 +1,9 @@
 angular
   .module("mainApp")
   .controller("POIListCtrl", function($scope, $http, $window) {
+    $scope.bySearchFilter = false;
+    $scope.presentNoSearchResults = false;
+
     //USER TOKEN//
     $scope.isLoggedIn = false;
 
@@ -37,7 +40,7 @@ angular
 
     $scope.bySearchFilter = false;
     $scope.POIsAfterFiltering = $scope.allPoisData;
-    $scope.POIsByCategory = {};
+    $scope.POIsByCategory = [];
     //  GETTING ALL POI DATA
     $http({
       method: "GET",
@@ -80,7 +83,7 @@ angular
                 categoryName: $scope.categoriesList[i]["categoryName"],
                 categoryData: response.data["POIs"]
               };
-              $scope.POIsByCategory[i] = categoryEntry;
+              $scope.POIsByCategory.push(categoryEntry);
             },
             function myError(response) {
               console.log(response);
@@ -90,7 +93,7 @@ angular
         $scope.allPoisData = $scope.POIsByCategory;
       },
       function myError(response) {
-        $scope.allPoisData = response.statusText;
+        // $scope.allPoisData = response.statusText;
         console.log(response);
       }
     );
@@ -98,19 +101,57 @@ angular
     // SEARCH FUNCTION INTIATED, FILTER BY TEXT CONTAINED IN THE NAME OF THE POI
     //todo fit to new by category presentation
     $scope.submitSearch = function() {
+      console.log($scope.POIsByCategory);
       var searchKeyWord = $scope.searchBox;
-      $scope.POIsAfterFiltering = [];
-      for (let i = 0; i < $scope.allPoisData.length; i++) {
-        if (
-          $scope.allPoisData[i]["name"]
-            .toLowerCase()
-            .includes(searchKeyWord.toLowerCase())
+      $scope.POIsByCategoryAndFilter = [];
+      let categoryName = "";
+      // console.log($scope.POIsByCategory);
+      for (let i = 0; i < $scope.POIsByCategory.length; i++) {
+        categoryName = $scope.POIsByCategory[i]["categoryName"];
+        var poisInCurrentCategory = [];
+        for (
+          let k = 0;
+          k < $scope.POIsByCategory[i]["categoryData"].length;
+          k++
         ) {
-          $scope.POIsAfterFiltering.push($scope.allPoisData[i]);
+          var poi = $scope.POIsByCategory[i]["categoryData"][k];
+          if (poi["name"].toLowerCase().includes(searchKeyWord.toLowerCase())) {
+            poisInCurrentCategory.push(poi);
+          }
+        }
+        // for (var poi in category["categoryData"]) {
+        // }
+        var currentCatObject = {};
+        currentCatObject["categoryName"] = categoryName;
+        currentCatObject["categoryData"] = poisInCurrentCategory;
+        if (currentCatObject["categoryData"].length > 0) {
+          $scope.POIsByCategoryAndFilter.push(currentCatObject);
         }
       }
       $scope.bySearchFilter = true;
+      if ($scope.POIsByCategoryAndFilter.length <= 0) {
+        $scope.presentNoSearchResults = true;
+      }
+      console.log($scope.POIsByCategoryAndFilter);
     };
+    $scope.byCategoryClicked = function(event) {
+      let catName = event.currentTarget.id;
+      console.log(catName);
+      $scope.POIsByCategoryAndFilter = [];
+      // console.log($scope.POIsByCategoryAndFilter);
+      for (let z = 0; z < $scope.POIsByCategory.length; z++) {
+        if ($scope.POIsByCategory[z]["categoryName"] == catName) {
+          if ($scope.POIsByCategory[z]["categoryData"].length > 0) {
+            $scope.POIsByCategoryAndFilter.push($scope.POIsByCategory[z]);
+          }
+        }
+      }
+      $scope.bySearchFilter = true;
+      if ($scope.POIsByCategoryAndFilter.length <= 0) {
+        $scope.presentNoSearchResults = true;
+      }
+    };
+
     // A POI IMAGE WAS CLICKED, REDIRECTED TO SINGLE POI PAGE
     $scope.POIClicked = function(event) {
       $window.location.href = "#!/SinglePOI/" + event.currentTarget.id;

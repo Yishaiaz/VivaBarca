@@ -37,7 +37,6 @@ mainApp.config(function($routeProvider) {
   });
 });
 mainApp.controller("mainCtrl", function($scope, $http, $window) {
-  console.log(localStorage);
   // helper functions
   $scope.goToPoiPage = function(event) {
     let poiId = event.currentTarget.id;

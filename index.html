@@ -29,6 +29,11 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <!--END for jquery and bootstrap-->
+    <!-- GOOGLE FONTS IMPORT -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Inconsolata|Indie+Flower|Montserrat&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="stylesheet" href="static/style.css" />
 
@@ -66,10 +71,7 @@
               <a class="nav-link" href="#!/register">Register</a>
             </li>
             <li class="nav-item" ng-hide="!isLoggedIn">
-              <a class="nav-link" href="#!/userProfile">my profile</a>
-            </li>
-            <li class="nav-item" ng-hide="!isLoggedIn">
-              <a class="nav-link" href="#!/userFavouritePOIs"></a>
+              <a class="nav-link" href="#!/userFavouritePOIs">
                 <i class="fa fa-star"></i> FavouritePOIs:{{
                   NumberOfFavouritePOIs
                 }}
@@ -81,6 +83,9 @@
             <li class="nav-item usernameNavBarDisplay">
               <h6 id="helloToUser">Hello</h6>
               <h6 id="navUsername">username</h6>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/userProfile">About</a>
             </li>
           </ul>
         </div>
