@@ -1,6 +1,39 @@
 angular
   .module("mainApp")
   .controller("loginCtrl", function($scope, $http, $window) {
+    $scope.passwordRevealText = "";
+    // PASSWORD RETRIEVEL SUBMITTED FUNCTION
+    $scope.submitPasswordRetrievel = function() {
+      var req = {
+        method: "POST",
+        url: "http://localhost:3000/Authentication/PasswordRetrieval",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        data: {
+          username: $scope.usernameToRetrieve,
+          answer1: $scope.ans1,
+          answer2: $scope.ans2
+        }
+      };
+      $http(req).then(
+        function mySuccess(response) {
+          $scope.passwordRevealText =
+            "Your password is: " + response.data["password"];
+          $scope.usernameToRetrieve = "";
+          $scope.ans1 = "";
+          $scope.ans2 = "";
+        },
+        function myError(response) {
+          $scope.passwordRevealText = "Your answer is incorrect";
+          $scope.usernameToRetrieve = "";
+          $scope.ans1 = "";
+          $scope.ans2 = "";
+        }
+      );
+      console.log(req);
+    };
+
     $scope.submit = function() {
       $scope.credentials = {
         username: $scope.username,

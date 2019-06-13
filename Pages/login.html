@@ -40,10 +40,113 @@
         />
       </form>
       <a href="#!/register">Don't have a user yet? Join Us</a>
-      <button class="btn btn-outline-info">Forgot your PASSWORD?</button>
+      <button
+        class="btn btn-outline-info"
+        data-toggle="modal"
+        data-target="#forgotYourPassword"
+      >
+        Forgot your PASSWORD?
+      </button>
     </div>
-    <div class="col-sm-3">
-      {{ testVar }}
+    <div class="col-sm-3"></div>
+  </div>
+  <!-- START OF forgot my password MODAL-->
+  <div
+    class="modal fade"
+    id="forgotYourPassword"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="forgotYourPassword"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="forgotYourPassword">
+            Answer question to retrieve password
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <h6 class="reviewInstruction">
+                  Answer the question you chose during registeration by order.
+                </h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <form name="reviewForm" ng-submit="submitPasswordRetrievel()" novalidate>
+                  <!-- <input type="text" name="reviewDescription" class="reviewDescription" ng-model="newReview" required ng-minlength="10"> -->
+                  <!-- USERNAME -->
+                  <input
+                    name="usernameToRetrieve"
+                    class="forgotPassModalInput form-text"
+                    ng-model="usernameToRetrieve"
+                    required
+                    placeholder="Enter your username"
+                  ></input>
+                  <span
+                    ng-show="reviewForm.usernameToRetrieve.$error.required"
+                    >This is required!
+                  </span>
+                  <!-- ANS1 -->
+                  <input
+                    name="ans1"
+                    class="forgotPassModalInput form-text"
+                    ng-model="ans1"
+                    required
+                    placeholder="the answer to your first question"
+                  ></input>
+                  <span
+                    ng-show="reviewForm.ans1.$error.required"
+                    >This is required!
+                  </span>
+                  <!-- ANS2 -->
+                  <input
+                    name="ans2"
+                    class="forgotPassModalInput form-text"
+                    ng-model="ans2"
+                    required
+                    placeholder="the answer to your second question"
+                  ></input>
+                  <span
+                    ng-show="reviewForm.ans2.$error.required"
+                    >This is required!
+                  </span>
+
+                  <!-- SUBMIT -->
+                  <br />          
+                  <input
+                    class="btn btn-dark"
+                    ng-disabled="reviewForm.$invalid"
+                    type="submit"
+                    id="submit"
+                    value="Submit"
+                  />
+                  
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <h6 style="color:red">{{passwordRevealText}}</h6>
+        </div>
+      </div>
     </div>
   </div>
+  <!-- END OF forgot my password MODAL-->
 </div>

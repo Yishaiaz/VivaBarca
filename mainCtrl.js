@@ -84,7 +84,13 @@ mainApp.controller("mainCtrl", function($scope, $http, $window) {
     $http({
       method: "POST",
       url: "http://localhost:3000/Analysis/getLastUsedPOIs",
-      headers: { "x-auth-token": $scope.userData["token"] }
+      headers: {
+        "x-auth-token": $scope.userData["token"],
+        "Content-Type": "application/json"
+      },
+      data: {
+        numOfPOIs: 5
+      }
     }).then(
       function mySuccess(response) {
         $scope.favouritePOISByTwoCategories = response.data["POIs"];

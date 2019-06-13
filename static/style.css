@@ -44,6 +44,14 @@ h3 {
 .loginPasswordInput {
   margin-top: 10px;
 }
+.newReviewDescription {
+  width: 100%;
+  height: 100px;
+}
+.forgotPassModalInput {
+  width: 100%;
+  height: auto;
+}
 /* END login screen style */
 
 /* START register screen style */
