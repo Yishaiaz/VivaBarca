@@ -107,6 +107,15 @@ h3 {
 /* END poi list screen style */
 
 /* START single poi screen style */
+.reviewsRows {
+  margin-top: 20px;
+}
+.reviewsSingleRow {
+  border: #bababb 2px solid;
+}
+.actionButtonsRow {
+  margin-top: 20px;
+}
 .reviewInstruction {
   font-size: 10px;
   color: coral;

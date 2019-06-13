@@ -1,6 +1,15 @@
 angular
   .module("mainApp")
   .controller("SinglePOICtrl", function($scope, $http, $routeParams) {
+    //getting logged user details
+    console.log($scope.isLoggedIn);
+    var isLoggedIn = $scope.isLoggedIn;
+    var userToken;
+    if (isLoggedIn) {
+      userToken = $scope.userData["token"];
+    }
+
+    $scope.reviewsExist = false;
     $scope.POIid = $routeParams.id;
     $http({
       method: "GET",
@@ -8,7 +17,25 @@ angular
     }).then(
       function mySuccess(response) {
         $scope.POIData = response.data["POI"];
-        console.log($scope.POIData);
+        var req = {
+          method: "GET",
+          url:
+            "http://localhost:3000/else/getAllReviews/" +
+            $scope.POIData["poiID"]
+        };
+        $http(req).then(
+          function mySuccess(response) {
+            console.log(response.data);
+            $scope.POIData["reviews"] = response.data;
+            if (response.data["Reviews"].length > 0) {
+              $scope.reviewsExist = true;
+            }
+            console.log($scope.POIData);
+          },
+          function myError(response) {
+            console.log(response);
+          }
+        );
       },
       function myError(response) {
         $scope.allPoisData = response.statusText;
@@ -24,9 +51,25 @@ angular
       };
       $("#writeReviewModal").modal("hide");
       console.log($scope.reviewData);
-      //   todo: send review to server by token.
-      //
+      console.log(userToken);
+      var req = {
+        method: "POST",
+        url: "http://localhost:3000/Analysis/addReview",
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": userToken
+        },
+        data: $scope.reviewData
+      };
       $scope.newReviewDescription = "";
+      $http(req).then(
+        function mySuccess(response) {
+          console.log(response);
+        },
+        function myError(response) {
+          console.log(response);
+        }
+      );
     };
     $scope.addToFavourites = function(event) {
       var allFavouriteButtons = document.getElementsByClassName(
