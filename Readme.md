@@ -1,5 +1,10 @@
 # Welcome to VivaBarca - where you explore Paris.
 
+## Authors:
+
+Yishaia Zabary
+Tamir Yaffe
+
 ## INSTRUCTIONS:
 
 ### 1:
