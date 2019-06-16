@@ -80,6 +80,27 @@ angular
           };
           $http(req).then(
             function mySuccess(response) {
+              // THIS IS FOR MARKING THE ALREADY FAVOURED ONES
+              var userFavouritesIDsTempList = JSON.parse(
+                localStorage.getItem("usersFavouritePOIs")
+              );
+              if (
+                userFavouritesIDsTempList != null &&
+                userFavouritesIDsTempList != undefined
+              ) {
+                for (let j = 0; j < response.data["POIs"].length; j++) {
+                  for (let m = 0; m < userFavouritesIDsTempList.length; m++) {
+                    if (
+                      response.data["POIs"][j]["poiID"] ==
+                      userFavouritesIDsTempList[m]["poiID"]
+                    ) {
+                      response.data["POIs"][j]["isFav"] = true;
+                    }
+                  }
+                }
+              }
+              // END OF MARKING THE FAVOURED ONE.
+
               let categoryEntry = {
                 categoryName: $scope.categoriesList[i]["categoryName"],
                 categoryData: response.data["POIs"]
@@ -102,7 +123,7 @@ angular
     // SEARCH FUNCTION INTIATED, FILTER BY TEXT CONTAINED IN THE NAME OF THE POI
     //todo fit to new by category presentation
     $scope.submitSearch = function() {
-      console.log($scope.POIsByCategory);
+      // console.log($scope.POIsByCategory);
       var searchKeyWord = $scope.searchBox;
       $scope.POIsByCategoryAndFilter = [];
       let categoryName = "";
@@ -227,6 +248,8 @@ angular
         "usersFavouritePOIs",
         JSON.stringify(POIsToAddToLCL)
       );
+      // RELOAD THE PAGE TO UPDATE DATA PRESENTATION
+      location.reload();
     };
     $scope.sortByRank = function(event) {
       if (
@@ -243,5 +266,8 @@ angular
       }
 
       $scope.bySearchFilter = true;
+    };
+    $scope.isFavourite = function(event) {
+      console.log(event);
     };
   });

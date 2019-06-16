@@ -58,7 +58,7 @@
                             <h6 class="poiListViewsNumberTitle">How Many Views<br></h6>
                             <h6 class="poiListViewsNumber">{{ poi["views"] }}</h3>
                             <h6 class="poiListRankTitle">Ranking<br></h6>
-                            <h6 class="poiListRank">{{ poi["ranking"] }} %</h3>
+                            <h6 class="poiListRank">{{ poi["ranking"] |number : 1}} %</h3>
                             <button class="isUserFavouriteIcon" ng-click="removeFromFavourites($event)" id="{{poi['poiID']}}"><i class="fa fa-star"></i></button>
                           </div>
                           <div class="col-sm-1 orderInputDiv">

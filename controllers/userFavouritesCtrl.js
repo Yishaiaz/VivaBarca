@@ -225,6 +225,8 @@ angular
         "usersFavouritePOIs",
         JSON.stringify($scope.userFavPOIs)
       );
+      // RELOAD THE PAGE TO UPDATE DATA PRESENTATION
+      location.reload();
     };
     $scope.sortByRank = function(event) {
       $scope.POIsByFilter = $scope.userFavPOIs;

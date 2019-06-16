@@ -103,10 +103,10 @@ mainApp.controller("mainCtrl", function($scope, $http, $window) {
         else {
           $scope.presentNoFavouritesYet = true;
         }
-        $scope.NumberOfFavouritePOIs = $scope.POIData.length;
-        for (let i = 0; i < $scope.POIData.length; i++) {
-          // todo: change api call to the right one and extract data.
-        }
+        // $scope.NumberOfFavouritePOIs = $scope.POIData.length;
+        // for (let i = 0; i < $scope.POIData.length; i++) {
+        // todo: change api call to the right one and extract data.
+        // }
       },
       function myError(response) {
         $scope.presentNoFavouritesYet = true;

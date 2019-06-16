@@ -119,5 +119,7 @@ angular
         "usersFavouritePOIs",
         JSON.stringify(POIsToAddToLCL)
       );
+      // RELOAD THE PAGE TO UPDATE DATA PRESENTATION
+      location.reload();
     };
   });
