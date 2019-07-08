@@ -17,7 +17,7 @@ install the visual studio code extension 'Live-server'.
 
 ### 3:
 
-start (deploy in local machine) the REST API SERVER.
+start (deploy in local machine) the REST API SERVER. (form the 'sever' dir run the shell command 'node app.js' )
 
 ### 4:
 
@@ -33,7 +33,7 @@ run visual code extension 'Live-server'.
 
 #### 1:
 
-Our frontend server utilizes the REST API server of a different couple.
+Our frontend server utilizes the REST API server of a different students' couple (assignment 3.2).
 
 the only changes applied to the other couple's work is from mistakes they found in their code.
 
@@ -79,4 +79,4 @@ _password_: 12345678
 
 q1: name of first pet | ans1: tuli
 
-q2: name of first teacher | ans2: tachles tuli
+q2: name of first teacher | ans2: rabin

@@ -106,6 +106,7 @@ angular
                 categoryData: response.data["POIs"]
               };
               $scope.POIsByCategory.push(categoryEntry);
+              // console.log($scope.POIsByCategory);
             },
             function myError(response) {
               console.log(response);
@@ -154,7 +155,7 @@ angular
       if ($scope.POIsByCategoryAndFilter.length <= 0) {
         $scope.presentNoSearchResults = true;
       }
-      console.log($scope.POIsByCategoryAndFilter);
+      // console.log($scope.POIsByCategoryAndFilter);
     };
     $scope.byCategoryClicked = function(event) {
       let catName = event.currentTarget.id;
@@ -187,19 +188,62 @@ angular
       let toRemove = false;
       for (let i = 0; i < allFavouriteButtons.length; i++) {
         if (allFavouriteButtons[i].id === event.currentTarget.id) {
-          if (
-            allFavouriteButtons[i].childNodes[0].className === "fa fa-star-o"
-          ) {
-            allFavouriteButtons[i].childNodes[0].className = "fa fa-star";
-            idToAddToFavourites = allFavouriteButtons[i].id;
-          } else {
-            allFavouriteButtons[i].childNodes[0].className = "fa fa-star-o";
-            idToAddToFavourites = allFavouriteButtons[i].id;
-            toRemove = true;
+          // console.log(event.currentTarget.id);
+          for (let j = 0; j < $scope.POIsByCategory.length; j++) {
+            for (
+              let k = 0;
+              k < $scope.POIsByCategory[j]["categoryData"].length;
+              k++
+            ) {
+              if (
+                parseInt(
+                  $scope.POIsByCategory[j]["categoryData"][k]["poiID"]
+                ) === parseInt(event.currentTarget.id)
+              ) {
+                if (
+                  allFavouriteButtons[i].childNodes[1].className ===
+                  "fa fa-star-o ng-scope"
+                ) {
+                  idToAddToFavourites = allFavouriteButtons[i].id;
+                  $scope.POIsByCategory[j]["categoryData"][k]["isFav"] = true;
+                } else {
+                  idToAddToFavourites = allFavouriteButtons[i].id;
+                  $scope.POIsByCategory[j]["categoryData"][k]["isFav"] = false;
+                  toRemove = true;
+                }
+              }
+            }
           }
+          // for (category in $scope.POIsByCategory) {
+          //   for (poi in category["categoryData"]) {
+          //     if (poi["poiID"] === event.currentTarget.id) {
+          //       if (
+          //         allFavouriteButtons[i].childNodes[1].className ===
+          //         "fa fa-star-o ng-scope"
+          //       ) {
+          //         idToAddToFavourites = allFavouriteButtons[i].id;
+          //         poi["isFav"] = true;
+          //       } else {
+          //         idToAddToFavourites = allFavouriteButtons[i].id;
+          //         poi["isFav"] = false;
+          //         toRemove = true;
+          //       }
+          //     }
+          //   }
+          // }
+          // if (
+          //     allFavouriteButtons[i].childNodes[0].className === "fa fa-star-o"
+          //   ) {
+          //     console.log("here");
+          //     allFavouriteButtons[i].childNodes[0].className = "fa fa-star";
+          //     idToAddToFavourites = allFavouriteButtons[i].id;
+          //   } else {
+          //     allFavouriteButtons[i].childNodes[0].className = "fa fa-star-o";
+          //     idToAddToFavourites = allFavouriteButtons[i].id;
+          //     toRemove = true;
+          //   }
         }
       }
-
       // SAVING TO LOCAL STORAGE
       var POIsToAddToLCL;
       let exists = false;
@@ -228,6 +272,7 @@ angular
             }
           }
           if (toAdd) {
+            console.log("here");
             POIsToAddToLCL.push({
               poiID: parseInt(idToAddToFavourites)
             });
@@ -244,6 +289,7 @@ angular
           }
         }
       }
+      // console.log(idToAddToFavourites);
       localStorage.setItem(
         "usersFavouritePOIs",
         JSON.stringify(POIsToAddToLCL)

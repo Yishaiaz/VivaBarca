@@ -1,8 +1,20 @@
 angular
   .module("mainApp")
   .controller("SinglePOICtrl", function($scope, $http, $routeParams) {
+    $scope.isSingleInFavourites = false;
+    $scope.POIid = $routeParams.id;
+
+    try {
+      var favouritePois = JSON.parse(
+        localStorage.getItem("usersFavouritePOIs")
+      );
+      for (let i = 0; i < favouritePois.length; i++) {
+        if (favouritePois[i]["poiID"] == $scope.POIid) {
+          $scope.isSingleInFavourites = true;
+        }
+      }
+    } catch {}
     //getting logged user details
-    console.log($scope.isLoggedIn);
     var isLoggedIn = $scope.isLoggedIn;
     var userToken;
     if (isLoggedIn) {
@@ -10,7 +22,7 @@ angular
     }
 
     $scope.reviewsExist = false;
-    $scope.POIid = $routeParams.id;
+
     $http({
       method: "GET",
       url: "http://localhost:3000/else/getPOIbyID/" + $scope.POIid
@@ -25,12 +37,10 @@ angular
         };
         $http(req).then(
           function mySuccess(response) {
-            console.log(response.data);
             $scope.POIData["reviews"] = response.data;
             if (response.data["Reviews"].length > 0) {
               $scope.reviewsExist = true;
             }
-            console.log($scope.POIData);
           },
           function myError(response) {
             console.log(response);
@@ -50,8 +60,6 @@ angular
         ranking: $scope.newRankingValue
       };
       $("#writeReviewModal").modal("hide");
-      console.log($scope.reviewData);
-      console.log(userToken);
       var req = {
         method: "POST",
         url: "http://localhost:3000/Analysis/addReview",

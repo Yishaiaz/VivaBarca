@@ -47,7 +47,8 @@
           </div>
           <div class="row actionButtonsRow">
               <div class="col-sm-6">
-                  <button class="btn btn-dark isUserFavouriteButton" id="{{POIData['poiID']}}" ng-disabled="!isLoggedIn" ng-click="addToFavourites($event)" title="Registerd users can have favourite POIs">Add to Favourites</button>
+                    <button class="btn btn-dark isUserFavouriteButton" id="{{POIData['poiID']}}" ng-show="isSingleInFavourites" ng-disabled="true">Already In Favourites</button>  
+                  <button class="btn btn-dark isUserFavouriteButton" id="{{POIData['poiID']}}" ng-disabled="!isLoggedIn" ng-click="addToFavourites($event)" title="Registerd users can have favourite POIs" ng-show="!isSingleInFavourites">Add to Favourites</button>
               </div>
               <div class="col-sm-6">
                     <button type="button" class="btn btn-dark"  data-toggle="modal" data-target="#writeReviewModal" title="Write a review" ng-disabled="!isLoggedIn" title="Write a review">Ever been here?</button>

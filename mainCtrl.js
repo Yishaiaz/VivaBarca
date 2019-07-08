@@ -94,7 +94,6 @@ mainApp.controller("mainCtrl", function($scope, $http, $window) {
     }).then(
       function mySuccess(response) {
         $scope.favouritePOISByTwoCategories = response.data["POIs"];
-        console.log($scope.favouritePOISByTwoCategories);
         // there are user favourite pois
         if ($scope.favouritePOISByTwoCategories.length > 0) {
           $scope.presentNoFavouritesYet = false;
